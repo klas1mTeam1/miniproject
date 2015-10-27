@@ -1,5 +1,7 @@
 __author__ = 'Martijn'
 
+#Deze code haalt data uit de NS-API en verwerkt de benodigde data met betrekking tot actuele vertrekinformatie.
+
 import requests
 import codecs
 import xmltodict
