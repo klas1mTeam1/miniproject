@@ -1,0 +1,31 @@
+__author__ = 'Martijn'
+
+import requests
+import codecs
+import xmltodict
+
+auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA')
+
+actueel_utrecht = requests.get('http://webservices.ns.nl/ns-api-avt?station=ut', auth=auth_details) #vertrektijden Utrecht Centraal
+
+def schrijf_actueel_utrecht_xml(actueel_utrecht): #schrijft een xml bestand van de actuele vertrekinformatie Station Utrecht Centraal
+    bestand = open('actueel_utrecht.xml', 'w')
+    bestand = codecs.open('actueel_utrecht.xml', "w", "utf-8")
+    bestand.write(str(actueel_utrecht.text))
+    bestand.close()
+
+schrijf_actueel_utrecht_xml(actueel_utrecht)
+
+def verwerk_actueel_utrecht_xml():
+    bestand = open('actueel_utrecht.xml', 'r')
+    xml_string = bestand.read()
+    return xmltodict.parse(xml_string)
+
+def print_actueel_utrecht(actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+    for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+        print('De trein van ' + str(rit['VertrekTijd'][11:16]) +
+              ' richting ' + str(rit['EindBestemming'])
+              + ' vertrekt vanaf spoor ' + str(rit['VertrekSpoor']['#text']) + '.')
+
+actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
+print_actueel_utrecht(actueel_utrecht_dict)
