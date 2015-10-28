@@ -25,11 +25,18 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
     bestand.close()
 
 def print_actueel_utrecht(actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+    index = 0
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
         print('De ' + str(rit['TreinSoort'])
               + ' van ' + str(rit['VertrekTijd'][11:16])
               + ' richting ' + str(rit['EindBestemming'])
               + ' vertrekt vanaf spoor ' + str(rit['VertrekSpoor']['#text']) + '.')
+        if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print('Deze trein reist via ' + str(rit['RouteTekst']) + '.')
+        if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print('De vertraging bedraagt ' + str(rit['VertrekVertragingTekst']) + '.')
+        print('\n')
+        index += 1
 
 actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
 print_actueel_utrecht(actueel_utrecht_dict)
