@@ -12,7 +12,7 @@ def tekstvak():
     def callback():
         content = tekstvakje.get()
         window.destroy()
-        # os.system() # Hier komt het .py bestand te staan van het Ander station Api scherm als hij af is.
+        # os.system('ander_station.py') # Hier komt het .py bestand te staan van het Ander station Api scherm als hij af is.
         print(content)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
@@ -25,7 +25,7 @@ def terug_hoofdmenu():
 # Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
     window.destroy()
-    # os.system() # Hier komt het .py bestand te staan van het Utrecht Centraal API scherm als hij af is.
+    # os.system('Utrecht_Centraal_API.py') # Hier komt het .py bestand te staan van het Utrecht Centraal API scherm als hij af is.
 
 window = Tk()
 
