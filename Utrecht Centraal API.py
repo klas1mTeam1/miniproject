@@ -40,3 +40,4 @@ def print_actueel_utrecht(actueel_utrecht_dict): #print de actuele vertrekinform
 
 actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
 print_actueel_utrecht(actueel_utrecht_dict)
+
