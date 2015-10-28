@@ -6,9 +6,9 @@ window = Tk()
 #Zet het venster in het midden van het scherm.
 window.withdraw()
 window.update_idletasks()
-x = (window.winfo_screenwidth() - window.winfo_reqwidth()) / 2.1
-y = (window.winfo_screenheight() - window.winfo_reqheight()) / 2.1
-window.geometry("+%d+%d" % (x, y))
+w = (window.winfo_screenwidth() - window.winfo_reqwidth()) / 2.1
+h = (window.winfo_screenheight() - window.winfo_reqheight()) / 2.1
+window.geometry("+%d+%d" % (w, h))
 window.deiconify()
 
 #Geeft het venster standaard NS geel achtergrond.
@@ -23,8 +23,11 @@ label.pack()
 def tekstvak():
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
-
-    ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackgroun = "white", activeforeground = "#003399")
+    tekstvakje.focus_set()
+    #Zorgt voor het returnen van de ingevulde tekst.
+    def callback():
+        print(tekstvakje.get())
+    ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackgroun = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 
 #Voegt een knop aan het venster om te kiezen voor het huidige station. (Doet nog niks)
