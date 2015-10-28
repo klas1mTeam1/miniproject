@@ -8,11 +8,11 @@ def tekstvak():
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
     tekstvakje.focus_set()
-    # Zorgt voor het returnen van de ingevulde tekst.
+    # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
         content = tekstvakje.get()
         window.destroy()
-        # os.system('ander_station.py') # Hier komt het .py bestand te staan van het Ander station Api scherm als hij af is.
+        os.system('ander_station.py')
         print(content)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
