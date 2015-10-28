@@ -2,6 +2,12 @@ __author__ = 'marce'
 
 from tkinter import *
 import tkinter as tk
+import os
+
+
+def naar_knop_code():
+    root.destroy()
+    os.system('Knop_Code.py')
 
 # Functie aangemaakt om de startscherm weer te geven.
 def create_window():
@@ -29,13 +35,13 @@ def create_window():
     bottomframe.pack(side=BOTTOM)
     bottomframe.pack(fill=BOTH)
 
-# onderstaande code voegt de vlag icons voor nederlands en engels.
+# onderstaande code voegt de vlag knoppen voor nederlands en engels.
     photo_nl = PhotoImage(file='nl_icon.gif')
-    label_nl = Label(bottomframe, image=photo_nl)
+    label_nl = tk.Button(bottomframe, text='Nederlands', image=photo_nl, compound=TOP, bg='navy', fg='white')
     label_nl.pack(side=LEFT, padx=5, pady=5)
 
     photo_uk = PhotoImage(file='uk_icon.gif')
-    label_uk = Label(bottomframe, image=photo_uk)
+    label_uk = tk.Button(bottomframe, text='English', image=photo_uk, compound=TOP, bg='navy', fg='white')
     label_uk.pack(side=LEFT, padx=5, pady=5)
 
 # onderstaande de code voor de welkomtekst
@@ -67,7 +73,7 @@ def create_window():
     knop2 = Button(text='Kopen\nlos kaartje', bg='navy', fg='white')
     knop3 = Button(text='Kopen\nOV-chipkaart', bg='navy', fg='white')
     knop4 = Button(text='Ik wil naar\nhet buitenland', bg='navy', fg='white')
-    knop5 = Button(text='Vertrektijden\ntreinen', bg='navy', fg='white')
+    knop5 = Button(text='Vertrektijden\ntreinen', bg='navy', fg='white', command=naar_knop_code())
 
 
     knop1.pack()
@@ -85,6 +91,5 @@ def create_window():
 
 
     root.mainloop()
-
 
 create_window()
