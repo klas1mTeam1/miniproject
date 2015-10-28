@@ -4,7 +4,7 @@ from tkinter import *
 import tkinter as tk
 import os
 
-
+# Hieronder een functie om knop 5 een opdracht te kunnen geven
 def naar_knop_code():
     root.destroy()
     os.system('Knop_Code.py')
@@ -14,15 +14,24 @@ def create_window():
     global root
     root = Tk()                 # Dit is het basis window.
     root.title("NS Automaat")              # titel van de window.
-    root.configure(background='#FECE22')
+    root.configure(background='#FECE22')    # Achtergrond kleur
 
-# onderstaande code zorgt ervoor dat de scherm in het midden van je monitor wordt weergegeven.
+    # onderstaande code zorgt ervoor dat de scherm in het midden van je monitor wordt weergegeven.
+    # Instellingen voor venster grootte en positie.
     root.withdraw()
     root.update_idletasks()
-    x = (root.winfo_screenwidth() - root.winfo_reqwidth()) / 3
-    y = (root.winfo_screenheight() - root.winfo_reqheight()) / 3
-    root.geometry("%sx%s+%d+%d" % (700, 500, 400, 150))
-    root.resizable(0,0)
+    w = 700 # Breedte van het venster.
+    h = 500 # Hoogte van het venster.
+
+    ws = root.winfo_screenwidth() # Breedte van het scherm.
+    hs = root.winfo_screenheight() # Hoogte van het scherm.
+
+    # x en y coordinaten berekenen van het venster.
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+
+    # Zet het venster op de goede plek met de goede grootte.
+    root.geometry('%dx%d+%d+%d' % (w, h, x, y))
     root.deiconify()
 
 # onderstaande code maakt de topframe en wordt ingepakt in de root window.
