@@ -1,6 +1,19 @@
 from tkinter import *
 import tkinter as tk
 
+# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt. (Returned de ingevoerde tekst nog niet)
+def tekstvak():
+    tekstvakje = tk.Entry(window, bg='white')
+    tekstvakje.pack(pady=5)
+    tekstvakje.focus_set()
+    # Zorgt voor het returnen van de ingevulde tekst.
+    def callback():
+        content = tekstvakje.get()
+        print(content)
+        # afsluiten = exit(window)
+    ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
+    ok_knop.pack(pady=5)
+
 window = Tk()
 
 # Instellingen voor venster grootte en positie.
@@ -31,24 +44,17 @@ titel.pack()
 subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18, 'bold'))
 subtitel.pack()
 
-# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt. (Returned de ingevoerde tekst nog niet)
-def tekstvak():
-    tekstvakje = tk.Entry(window, bg='white')
-    tekstvakje.pack(pady=5)
-    tekstvakje.focus_set()
-    # Zorgt voor het returnen van de ingevulde tekst.
-    def callback():
-        content = tekstvakje.get()
-        print(content)
-    ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
-    ok_knop.pack(pady=5)
 
 # Voegt een knop aan het venster om te kiezen voor het huidige station. (Doet nog niks)
-knop_huidig_station = Button(window, text="Utrecht\nCentraal", fg="white", bg="#003399", activebackgroun = "white", activeforeground = "#003399", height = 2, width = 10)
+knop_huidig_station = Button(window, text="Utrecht\nCentraal", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10)
 knop_huidig_station.pack(pady=5)
 
 # Voegt een knip aan het venster om te kiezen voor een ander station.
-knop_ander_station = Button(window, text="Ander\nstation", fg="white", bg="#003399", activebackgroun = "white", activeforeground = "#003399", height = 2, width = 10, command = (tekstvak))
+knop_ander_station = Button(window, text="Ander\nstation", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10, command = (tekstvak))
 knop_ander_station.pack(pady=5)
+
+knop_terug = Button(window, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15)
+knop_terug.pack()
+knop_terug.place(relx=0.01, rely=0.9)
 
 window.mainloop()
