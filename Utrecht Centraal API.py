@@ -5,10 +5,16 @@ __author__ = 'Martijn'
 import requests
 import codecs
 import xmltodict
+import sys
 
 auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
-actueel_utrecht = requests.get('http://webservices.ns.nl/ns-api-avt?station=ut', auth=auth_details) #actuele vertrekinformatie Utrecht Centraal
+try:
+    actueel_utrecht = requests.get('http://webservices.ns.nl/ns-api-avt?station=ut', auth=auth_details) #actuele vertrekinformatie Utrecht Centraal
+except:
+    print("Kan geen verbinding maken met de NS API.")
+    sys.exit()
+    
 
 def schrijf_actueel_utrecht_xml(actueel_utrecht): #schrijft een xml bestand van de actuele vertrekinformatie Station Utrecht Centraal
     bestand = open('actueel_utrecht.xml', 'w')
@@ -25,11 +31,20 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
     bestand.close()
 
 def print_actueel_utrecht(actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+    index = 0
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
         print('De ' + str(rit['TreinSoort'])
               + ' van ' + str(rit['VertrekTijd'][11:16])
               + ' richting ' + str(rit['EindBestemming'])
               + ' vertrekt vanaf spoor ' + str(rit['VertrekSpoor']['#text']) + '.')
+        if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print('Deze trein reist via ' + str(rit['RouteTekst']) + '.')
+        if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print(str(rit['Opmerkingen']['Opmerking']) + '.')
+        if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print('De vertraging bedraagt ' + str(rit['VertrekVertragingTekst']) + '.')
+        print('\n')
+        index += 1
 
 actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
 print_actueel_utrecht(actueel_utrecht_dict)
