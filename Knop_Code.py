@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+import os
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt. (Returned de ingevoerde tekst nog niet)
 def tekstvak():
@@ -10,9 +11,14 @@ def tekstvak():
     def callback():
         content = tekstvakje.get()
         print(content)
-        # afsluiten = exit(window)
+        # exit(window)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
+
+# Geeft functionaliteit aan de "Terug naar het hoofdmenu" knop.
+def terug_hoofdmenu():
+    window.destroy()
+    os.system('Startscherm.py')
 
 window = Tk()
 
@@ -31,7 +37,6 @@ y = (hs/2) - (h/2)
 
 # Zet het venster op de goede plek met de goede grootte.
 window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
 window.deiconify()
 
 # Geeft het venster standaard NS geel achtergrond.
@@ -49,11 +54,12 @@ subtitel.pack()
 knop_huidig_station = Button(window, text="Utrecht\nCentraal", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10)
 knop_huidig_station.pack(pady=5)
 
-# Voegt een knip aan het venster om te kiezen voor een ander station.
+# Voegt een knop aan het venster om te kiezen voor een ander station.
 knop_ander_station = Button(window, text="Ander\nstation", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10, command = (tekstvak))
 knop_ander_station.pack(pady=5)
 
-knop_terug = Button(window, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15)
+# Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu. (Doet nog niks)
+knop_terug = Button(window, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
 knop_terug.pack()
 knop_terug.place(relx=0.01, rely=0.9)
 
