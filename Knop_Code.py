@@ -4,6 +4,7 @@ import os
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
+    knop_ander_station.configure(state = DISABLED)
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
     tekstvakje.focus_set()
