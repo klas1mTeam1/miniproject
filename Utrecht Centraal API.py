@@ -33,6 +33,8 @@ def print_actueel_utrecht(actueel_utrecht_dict): #print de actuele vertrekinform
               + ' vertrekt vanaf spoor ' + str(rit['VertrekSpoor']['#text']) + '.')
         if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
             print('Deze trein reist via ' + str(rit['RouteTekst']) + '.')
+        if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            print(str(rit['Opmerkingen']['Opmerking']) + '.')
         if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
             print('De vertraging bedraagt ' + str(rit['VertrekVertragingTekst']) + '.')
         print('\n')
