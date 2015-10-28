@@ -58,7 +58,7 @@ knop_huidig_station.pack(pady=5)
 knop_ander_station = Button(window, text="Ander\nstation", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10, command = (tekstvak))
 knop_ander_station.pack(pady=5)
 
-# Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu. (Doet nog niks)
+# Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu.
 knop_terug = Button(window, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
 knop_terug.pack()
 knop_terug.place(relx=0.01, rely=0.9)
