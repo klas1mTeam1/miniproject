@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 import os
 
-# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt. (Returned de ingevoerde tekst nog niet)
+# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
@@ -10,8 +10,9 @@ def tekstvak():
     # Zorgt voor het returnen van de ingevulde tekst.
     def callback():
         content = tekstvakje.get()
+        window.destroy()
+        # os.system() # Hier komt het .py bestand te staan van het Ander station Api scherm als hij af is.
         print(content)
-        # exit(window)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 
@@ -19,6 +20,11 @@ def tekstvak():
 def terug_hoofdmenu():
     window.destroy()
     os.system('Startscherm.py')
+
+# Geeft functionaliteit aan de "Utrecht Centraal" knop.
+def knop_utrecht():
+    window.destroy()
+    # os.system() # Hier komt het .py bestand te staan van het Utrecht Centraal API scherm als hij af is.
 
 window = Tk()
 
@@ -44,14 +50,14 @@ window.tk_setPalette(background='#FECE22')
 
 # Standaard venster met keuze.
 window.title("Actuele vertrektijden")
-titel = Label(window, text='Actuele vertrektijden.\n', fg='#003399', font = ('Ariel',24, 'bold'))
+titel = Label(window, text='\nActuele vertrektijden.\n', fg='#003399', font = ('Ariel',24, 'bold'))
 titel.pack()
-subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18, 'bold'))
+subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18))
 subtitel.pack()
 
 
-# Voegt een knop aan het venster om te kiezen voor het huidige station. (Doet nog niks)
-knop_huidig_station = Button(window, text="Utrecht\nCentraal", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10)
+# Voegt een knop aan het venster om te kiezen voor het huidige station.
+knop_huidig_station = Button(window, text="Utrecht\nCentraal", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 10, command = knop_utrecht)
 knop_huidig_station.pack(pady=5)
 
 # Voegt een knop aan het venster om te kiezen voor een ander station.
