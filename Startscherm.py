@@ -14,7 +14,7 @@ def create_window():
     global root
     root = Tk()                 # Dit is het basis window.
     root.title("NS Automaat")              # titel van de window.
-    root.configure(background='gold')
+    root.configure(background='#FECE22')
 
 # onderstaande code zorgt ervoor dat de scherm in het midden van je monitor wordt weergegeven.
     root.withdraw()
@@ -37,23 +37,23 @@ def create_window():
 
 # onderstaande code voegt de vlag knoppen voor nederlands en engels.
     photo_nl = PhotoImage(file='nl_icon.gif')
-    label_nl = tk.Button(bottomframe, text='Nederlands', image=photo_nl, compound=TOP, bg='navy', fg='white')
+    label_nl = tk.Button(bottomframe, text='Nederlands', image=photo_nl, compound=TOP, bg='#003399', fg='white')
     label_nl.pack(side=LEFT, padx=5, pady=5)
 
     photo_uk = PhotoImage(file='uk_icon.gif')
-    label_uk = tk.Button(bottomframe, text='English', image=photo_uk, compound=TOP, bg='navy', fg='white')
+    label_uk = tk.Button(bottomframe, text='English', image=photo_uk, compound=TOP, bg='#003399', fg='white')
     label_uk.pack(side=LEFT, padx=5, pady=5)
 
 # onderstaande de code voor de welkomtekst
     welkom = Label(topframe, text='\n\nWelkom bij NS')
-    welkom.config(foreground='navy', background='gold', font=('Ariel',25,'bold'))
+    welkom.config(foreground='#003399', background='#FECE22', font=('Ariel',25,'bold'))
     welkom.pack()
 
 # onderstaande de code voor een canvas
     canvas = Canvas(bg='white', height=160, width=290)
-    canvas.config(highlightbackground='navy')
+    canvas.config(highlightbackground='#003399')
     tekst_canvas = Label(text='Houd uw\nOV-chipkaart\nvoor de\nkaartlezer\nrechtsonder\nnaast het scherm.',
-                         bg='white', fg='navy', font=('Ariel',10, 'bold'))
+                         bg='white', fg='#003399', font=('Ariel',10, 'bold'))
     canvas.pack()
     tekst_canvas.pack()
     tekst_canvas.place(width=120, height=150, relx=0.3, rely=0.25)
@@ -69,11 +69,11 @@ def create_window():
     label_af2.place(relx=0.65, rely=0.48)
 
 # Hieronder maken we de knoppen
-    knop1 = Button(text='Ik wil naar\nAmsterdam', bg='navy', fg='white')
-    knop2 = Button(text='Kopen\nlos kaartje', bg='navy', fg='white')
-    knop3 = Button(text='Kopen\nOV-chipkaart', bg='navy', fg='white')
-    knop4 = Button(text='Ik wil naar\nhet buitenland', bg='navy', fg='white')
-    knop5 = Button(text='Vertrektijden\ntreinen', bg='navy', fg='white', command=naar_knop_code())
+    knop1 = Button(text='Ik wil naar\nAmsterdam', bg='#003399', fg='white')
+    knop2 = Button(text='Kopen\nlos kaartje', bg='#003399', fg='white')
+    knop3 = Button(text='Kopen\nOV-chipkaart', bg='#003399', fg='white')
+    knop4 = Button(text='Ik wil naar\nhet buitenland', bg='#003399', fg='white')
+    knop5 = Button(text='Vertrektijden\ntreinen', bg='#003399', fg='white', command=naar_knop_code)
 
 
     knop1.pack()
