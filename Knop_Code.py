@@ -1,3 +1,5 @@
+__author__ = 'Youri'
+
 from tkinter import *
 import tkinter as tk
 import os
@@ -25,7 +27,7 @@ def terug_hoofdmenu():
 # Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
     window.destroy()
-    # os.system('Utrecht_Centraal_API.py') # Hier komt het .py bestand te staan van het Utrecht Centraal API scherm als hij af is.
+    # os.system('utrecht_tkinter.py') # Hier komt het .py bestand te staan van het Utrecht Centraal API scherm als hij af is.
 
 window = Tk()
 
