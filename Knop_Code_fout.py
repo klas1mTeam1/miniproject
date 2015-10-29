@@ -84,6 +84,7 @@ def scherm():
     # Zet het venster op de goede plek met de goede grootte.
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
     window.deiconify()
+    window.resizable(0, 0)
 
     # Geeft het venster standaard NS geel achtergrond.
     window.tk_setPalette(background='#FECE22')
