@@ -2,12 +2,12 @@ __author__ = 'marce'
 
 from tkinter import *
 import tkinter as tk
-import os
+import Knop_Code
 
 # Hieronder een functie om knop 5 een opdracht te kunnen geven
 def naar_knop_code():
     root.destroy()
-    os.system('Knop_Code.py')
+    Knop_Code.scherm()
 
 # Functie aangemaakt om de startscherm weer te geven.
 def create_window():
@@ -116,7 +116,7 @@ def create_window():
     knop2 = Button(text='Kopen\nlos kaartje', bg='#003399', fg='white')
     knop3 = Button(text='Kopen\nOV-chipkaart', bg='#003399', fg='white')
     knop4 = Button(text='Ik wil naar\nhet buitenland', bg='#003399', fg='white')
-    knop5 = Button(text='Vertrektijden\ntreinen', bg='#003399', fg='white', command=naar_knop_code)
+    knop5 = Button(text='Actuele\nvertrektijden', bg='#003399', fg='white', command=naar_knop_code)
 
 
     knop1.pack()
@@ -134,5 +134,3 @@ def create_window():
 
 
     root.mainloop()
-
-create_window()

@@ -80,7 +80,7 @@ window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 window.deiconify()
 
 label = Label(window, text= treinsoort + vertrektijd + richting + spoor + routetekst + opmerkingen + vertraging )
-label.pack()
+label.grid(row=0, column=0)
 
 
 # Geeft het venster standaard NS geel achtergrond.
