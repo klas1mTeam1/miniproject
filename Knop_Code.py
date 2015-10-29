@@ -6,6 +6,7 @@ import requests
 import codecs
 import Startscherm
 import Knop_Code_fout
+import 
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
