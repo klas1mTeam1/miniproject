@@ -2,23 +2,23 @@ __author__ = 'marce'
 
 from tkinter import *
 import tkinter as tk
-import Knop_Code
-import Startscherm_engels
+import Knop_Code_engels
+import Startscherm
 
 # Hieronder een functie om knop 5 een opdracht te kunnen geven
-def naar_knop_code():
+def naar_knop_code_engels():
     root.destroy()
-    Knop_Code.scherm()
+    Knop_Code_engels.scherm()
 
-def taal_engels():
+def taal_nederlands():
     root.destroy()
-    Startscherm_engels.create_window()
+    Startscherm.create_window()
 
 # Functie aangemaakt om de startscherm weer te geven.
 def create_window():
     global root
     root = Tk()                 # Dit is het basis window.
-    root.title("NS Automaat")              # titel van de window.
+    root.title("NS Machine")              # titel van de window.
     root.configure(background='#FECE22')    # Achtergrond kleur
 
 # onderstaande code zorgt ervoor dat de scherm in het midden van je monitor wordt weergegeven.
@@ -53,12 +53,12 @@ def create_window():
 
 # onderstaande code voegt de vlag knoppen voor nederlands en engels.
     photo_nl = PhotoImage(file='nl_icon.gif')
-    label_nl = Button(bottomframe,image=photo_nl, bg='#003399')
+    label_nl = Button(bottomframe,image=photo_nl, bg='#003399', command = taal_nederlands)
     label_nl.pack()
     label_nl.place(relx=0.02, rely=0.1)
 
     photo_uk = PhotoImage(file='uk_icon.gif')
-    label_uk = Button(bottomframe, image=photo_uk, bg='#003399', command=taal_engels)
+    label_uk = Button(bottomframe, image=photo_uk, bg='#003399')
     label_uk.pack()
     label_uk.place(relx=0.133, rely=0.1)
 
@@ -94,14 +94,14 @@ def create_window():
     mastercard_label.place(relx=0.615, rely=0.08)
 
 # onderstaande de code voor de welkomtekst.
-    welkom = Label(topframe, text='\n\nWelkom bij NS')
+    welkom = Label(topframe, text='\n\nWelcome to NS')
     welkom.config(foreground='#003399', background='#FECE22', font=('Ariel',25,'bold'))
     welkom.pack()
 
 # onderstaande de code voor een canvas
     canvas = Canvas(bg='white', height=160, width=290)      # Canvas parameters, achtergrond kleur, hoogdte en breedte.
     canvas.config(highlightbackground='#003399')            # hier wordt er een omranding van de kanvas toegevoegd.
-    tekst_canvas = Label(text='Houd uw\nOV-chipkaart\nvoor de\nkaartlezer\nrechtsonder\nnaast het scherm.',
+    tekst_canvas = Label(text='Hold your\nOV-chipcard\nin front of\ncardreader\nright below\nthe screen.',
                          bg='white', fg='#003399', font=('Ariel',10, 'bold'))
     canvas.pack()
     tekst_canvas.pack()
@@ -118,11 +118,11 @@ def create_window():
     label_af2.place(relx=0.65, rely=0.48)
 
 # Hieronder maken we de knoppen
-    knop1 = Button(text='Ik wil naar\nAmsterdam', bg='#003399', fg='white')
-    knop2 = Button(text='Kopen\nlos kaartje', bg='#003399', fg='white')
-    knop3 = Button(text='Kopen\nOV-chipkaart', bg='#003399', fg='white')
-    knop4 = Button(text='Ik wil naar\nhet buitenland', bg='#003399', fg='white')
-    knop5 = Button(text='Actuele\nvertrektijden', bg='#003399', fg='white', command=naar_knop_code)
+    knop1 = Button(text='I want to go to\nAmsterdam', bg='#003399', fg='white')
+    knop2 = Button(text='Buy\nsingle ticket', bg='#003399', fg='white')
+    knop3 = Button(text='Buy\nOV-chipcard', bg='#003399', fg='white')
+    knop4 = Button(text='I want to go\nabroad', bg='#003399', fg='white')
+    knop5 = Button(text='Current\ndepartures', bg='#003399', fg='white', command=naar_knop_code_engels)
 
 
     knop1.pack()
