@@ -7,6 +7,7 @@ import codecs
 import Startscherm
 import Knop_Code_fout2
 import Utrecht_centraal_in_tkinter_interface
+import ander_station_in_tkinter_interface
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
@@ -38,6 +39,13 @@ def tekstvak():
 
         schrijf_actueel_as_xml()
 
+        def check_station_bestand():
+            bestand = open('check_station.txt', 'w')
+            bestand.write(content)
+            bestand.close()
+
+        check_station_bestand()
+
         def check_station():
             error = "No station found for input"
             error2 = "station parameter should be provided"
@@ -50,8 +58,8 @@ def tekstvak():
                 window.destroy()
                 Knop_Code_fout2.scherm()
             else:
-                print('Goed')
                 window.destroy()
+                ander_station_in_tkinter_interface.as_scherm()
             bestand.close()
         check_station()
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)

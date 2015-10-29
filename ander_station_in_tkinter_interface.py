@@ -6,12 +6,23 @@ import codecs
 import xmltodict
 import sys
 import Startscherm
-from Knop_Code import content
-
+import Knop_Code
 
 def terug_hoofdmenu():
     window.destroy()
     Startscherm.create_window()
+
+def terug():
+    window.destroy()
+    Knop_Code.scherm()
+
+def get_input():
+    global content
+    bestand = open('check_station.txt', 'r')
+    content = bestand.read()
+    bestand.close()
+
+get_input()
 
 auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
@@ -52,7 +63,6 @@ def plaats_actueel_as_op_grid(root, actueel_as_dict): #print de actuele vertreki
         if index==18:
             break
 
-
         if 'RouteTekst' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
             routetekst  =  str(rit['RouteTekst'])
         else:
@@ -82,10 +92,8 @@ actueel_as_dict = verwerk_actueel_as_xml()
 
 
 def as_scherm():
+    global window
     window = Tk()
-
-
-
 
     # Instellingen voor venster grootte en positie.
     window.withdraw()
@@ -121,9 +129,12 @@ def as_scherm():
     # Standaard venster met keuze.
     window.title("Actuele vertrektijden")
 
-    knop_terug = Button(bottomframe, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
+    knop_terug = Button(bottomframe, text="Terug", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug)
     knop_terug.pack()
     knop_terug.place(relx=0.01, rely=0.2)
 
+    knop_terug_hoofdmenu = Button(bottomframe, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
+    knop_terug_hoofdmenu.pack()
+    knop_terug_hoofdmenu.place(relx=0.19, rely=0.2)
 
     window.mainloop()
