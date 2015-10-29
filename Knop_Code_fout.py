@@ -49,11 +49,9 @@ def tekstvak():
                 Knop_Code_fout2.scherm()
             else:
                 print('Goed')
+                window.destroy()
             bestand.close()
-
         check_station()
-        window.destroy()
-        print(content)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 

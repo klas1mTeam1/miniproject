@@ -48,6 +48,7 @@ def tekstvak():
                 window.destroy()
                 Knop_Code_fout.scherm()
             else:
+                print('Goed')
                 window.destroy()
             bestand.close()
         check_station()
