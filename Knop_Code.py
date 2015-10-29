@@ -37,9 +37,13 @@ def tekstvak():
 
         def check_station():
             error = "No station found for input"
+            error2 = "station parameter should be provided"
             bestand = open('actueel_as.xml', 'r')
             data = bestand.read()
             if error in data:
+                window.destroy()
+                Knop_Code_fout.scherm()
+            elif error2 in data:
                 window.destroy()
                 Knop_Code_fout.scherm()
             else:
