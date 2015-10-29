@@ -44,7 +44,10 @@ def tekstvak():
 
         def check_station_bestand():
             bestand = open('check_station.txt', 'w')
+            bestand.write(content)
+            bestand.close()
 
+        check_station_bestand()
 
         def check_station():
             error = "No station found for input"
