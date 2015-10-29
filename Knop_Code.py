@@ -22,6 +22,7 @@ def tekstvak():
     def callback():
         global content
         content = tekstvakje.get()
+
         auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
         try:
@@ -40,6 +41,10 @@ def tekstvak():
             bestand.close()
 
         schrijf_actueel_as_xml()
+
+        def check_station_bestand():
+            bestand = open('check_station.txt', 'w')
+
 
         def check_station():
             error = "No station found for input"

@@ -17,6 +17,7 @@ def tekstvak():
     def callback():
         global content
         content = tekstvakje.get()
+
         auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
         try:
