@@ -31,13 +31,14 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
     return xmltodict.parse(xml_string)
 
 def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+    index = 0
+
     Label(root, text='Tijd', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=0, sticky=NW)
     Label(root, text='Naar', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=1, sticky=NW)
     Label(root, text='Spoor', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=2, sticky=NW)
     Label(root, text='Via', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=3, sticky=NW)
     Label(root, text='Reisdetails', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=4, sticky=NW)
 
-    index = 0
     result = ""
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
 
@@ -58,7 +59,7 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
             VertekVertragingTekst = ""
 
         Label(root, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=0, sticky=NW)
-        Label(root, text=str(rit['EindBestemming']),  fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
+        Label(root, text=str(rit['EindBestemming']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
         Label(root, text=str(rit['VertrekSpoor']['#text']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=2, sticky=NW)
         Label(root, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=3, sticky=NW)
         Label(root, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=4, sticky=NW)
@@ -70,6 +71,9 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
 actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
 
 window = Tk()
+
+
+
 
 # Instellingen voor venster grootte en positie.
 window.withdraw()
@@ -95,7 +99,6 @@ plaats_actueel_utrecht_op_grid(window, actueel_utrecht_dict)
 
 # Standaard venster met keuze.
 window.title("Actuele vertrektijden")
-
 
 
 window.mainloop()
