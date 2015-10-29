@@ -14,7 +14,7 @@ def tekstvak():
     def callback():
         content = tekstvakje.get()
         window.destroy()
-        os.system('ander_station.py')
+        # os.system('ander_station.py')
         print(content)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
@@ -30,6 +30,9 @@ def knop_utrecht():
 
 def scherm():
     global window
+    global knop_ander_station
+    global knop_huidig_station
+
     window = Tk()
 
     # Instellingen voor venster grootte en positie.
