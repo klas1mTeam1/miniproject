@@ -5,28 +5,6 @@
 <ActueleVertrekTijden>
 
 	<VertrekkendeTrein>
-		<RitNummer>8882</RitNummer>
-		<VertrekTijd>2015-10-29T23:25:00+0100</VertrekTijd>
-		
-			<VertrekVertraging>PT5M</VertrekVertraging>
-		
-		
-			<VertrekVertragingTekst>+5 min</VertrekVertragingTekst>
-		
-		<EindBestemming>Leiden Centraal</EindBestemming>
-		<TreinSoort>Intercity</TreinSoort>
-		
-			<RouteTekst>Woerden, Alphen a/d Rijn, Lammenschans</RouteTekst>
-		
-		
-			<Vervoerder>NS</Vervoerder>
-		
-		<VertrekSpoor wijziging="true">11b</VertrekSpoor>
-		
-		
-	</VertrekkendeTrein>
-
-	<VertrekkendeTrein>
 		<RitNummer>9882</RitNummer>
 		<VertrekTijd>2015-10-29T23:35:00+0100</VertrekTijd>
 		
@@ -293,7 +271,7 @@
 		
 			<Vervoerder>NS</Vervoerder>
 		
-		<VertrekSpoor wijziging="false">21</VertrekSpoor>
+		<VertrekSpoor wijziging="true">20</VertrekSpoor>
 		
 		
 	</VertrekkendeTrein>
