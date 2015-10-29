@@ -7,9 +7,6 @@ import codecs
 import Startscherm
 import Knop_Code_fout
 import Utrecht_centraal_in_tkinter_interface
-
-content = NONE
-
 import ander_station_in_tkinter_interface
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
