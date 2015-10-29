@@ -6,6 +6,11 @@ import requests
 import codecs
 import xmltodict
 import sys
+import Startscherm
+
+def terug_hoofdmenu():
+    window.destroy()
+    Startscherm.create_window()
 
 auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
@@ -33,14 +38,16 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
 def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
     index = 0
 
-    Label(root, text='Tijd', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=0, sticky=NW)
-    Label(root, text='Naar', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=1, sticky=NW)
-    Label(root, text='Spoor', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=2, sticky=NW)
-    Label(root, text='Via', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=3, sticky=NW)
-    Label(root, text='Reisdetails', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=4, sticky=NW)
+    Label(topframe, text='Tijd', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=0, sticky=NW)
+    Label(topframe, text='Naar', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=1, sticky=NW)
+    Label(topframe, text='Spoor', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=2, sticky=NW)
+    Label(topframe, text='Via', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=3, sticky=NW)
+    Label(topframe, text='Reisdetails', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=4, sticky=NW)
 
     result = ""
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+        if index==18:
+            break
 
 
         if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
@@ -58,11 +65,11 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
         else:
             VertekVertragingTekst = ""
 
-        Label(root, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=0, sticky=NW)
-        Label(root, text=str(rit['EindBestemming']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
-        Label(root, text=str(rit['VertrekSpoor']['#text']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=2, sticky=NW)
-        Label(root, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=3, sticky=NW)
-        Label(root, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=4, sticky=NW)
+        Label(topframe, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=0, sticky=NW)
+        Label(topframe, text=str(rit['EindBestemming']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
+        Label(topframe, text=str(rit['VertrekSpoor']['#text']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=2, sticky=NW)
+        Label(topframe, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=3, sticky=NW)
+        Label(topframe, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=4, sticky=NW)
 
         index += 1
 
@@ -95,10 +102,23 @@ window.deiconify()
 # Geeft het venster standaard NS geel achtergrond.
 window.tk_setPalette(background='#FECE22')
 
+global topframe
+topframe = Frame(window)
+topframe.pack()
+
+global bottomframe
+bottomframe = Frame(window, width=800, height=60)
+bottomframe.pack(side=BOTTOM)
+bottomframe.pack_propagate(0)
+
 plaats_actueel_utrecht_op_grid(window, actueel_utrecht_dict)
 
 # Standaard venster met keuze.
 window.title("Actuele vertrektijden")
+
+knop_terug = Button(bottomframe, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
+knop_terug.pack()
+knop_terug.place(relx=0.01, rely=0.2)
 
 
 window.mainloop()
