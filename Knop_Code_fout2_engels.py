@@ -6,11 +6,6 @@ import requests
 import codecs
 import Startscherm_engels
 import Knop_Code_fout_engels
-import Utrecht_centraal_in_tkinter_interface_engels
-
-content = NONE
-
-import ander_station_in_tkinter_interface
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
@@ -42,13 +37,6 @@ def tekstvak():
 
         schrijf_actueel_as_xml()
 
-        def check_station_bestand():
-            bestand = open('check_station.txt', 'w')
-            bestand.write(content)
-            bestand.close()
-
-        check_station_bestand()
-
         def check_station():
             error = "No station found for input"
             error2 = "station parameter should be provided"
@@ -61,8 +49,8 @@ def tekstvak():
                 window.destroy()
                 Knop_Code_fout_engels.scherm()
             else:
+                print('Goed')
                 window.destroy()
-                ander_station_in_tkinter_interface.as_scherm()
             bestand.close()
         check_station()
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
@@ -76,7 +64,6 @@ def terug_hoofdmenu_engels():
 # Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
     window.destroy()
-    Utrecht_centraal_in_tkinter_interface_engels.utrecht_scherm()
 
 def scherm():
     global window
@@ -111,6 +98,8 @@ def scherm():
     titel.pack()
     subtitel = Label(window, text='What station would you like to see current departures of?\n', fg='#003399', font = ('Ariel',18))
     subtitel.pack()
+    error_tekst = Label(window, text = 'The entered station could not be found.\n', fg='red', font = ('Ariel', 14, 'bold'))
+    error_tekst.pack()
 
 
     # Voegt een knop aan het venster om te kiezen voor het huidige station.
@@ -122,7 +111,7 @@ def scherm():
     knop_ander_station.pack(pady=5)
 
     # Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu.
-    knop_terug = Button(window, text="Back to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu_engels)
+    knop_terug = Button(window, text="Return to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu_engels)
     knop_terug.pack()
     knop_terug.place(relx=0.01, rely=0.9)
 
