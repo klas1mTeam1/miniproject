@@ -8,6 +8,10 @@ import Startscherm
 import Knop_Code_fout
 import Utrecht_centraal_in_tkinter_interface
 
+content = NONE
+
+import ander_station_in_tkinter_interface
+
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
     knop_ander_station.configure(state = DISABLED)
@@ -16,6 +20,7 @@ def tekstvak():
     tekstvakje.focus_set()
     # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        global content
         content = tekstvakje.get()
         auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
@@ -48,8 +53,8 @@ def tekstvak():
                 window.destroy()
                 Knop_Code_fout.scherm()
             else:
-                print('Goed')
                 window.destroy()
+                ander_station_in_tkinter_interface.as_scherm()
             bestand.close()
         check_station()
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
