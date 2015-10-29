@@ -27,13 +27,20 @@ schrijf_actueel_utrecht_xml(actueel_utrecht)
 def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht Centraal xml naar dictionary
     bestand = open('actueel_utrecht.xml', 'r')
     xml_string = bestand.read()
-    return xmltodict.parse(xml_string)
     bestand.close()
+    return xmltodict.parse(xml_string)
 
 def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+    Label(root, text='Tijd', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=0, sticky=NW)
+    Label(root, text='Naar', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=1, sticky=NW)
+    Label(root, text='Spoor', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=2, sticky=NW)
+    Label(root, text='Via', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=3, sticky=NW)
+    Label(root, text='Reisdetails', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=4, sticky=NW)
+
     index = 0
     result = ""
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+
 
         if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
             routetekst  =  str(rit['RouteTekst'])
@@ -41,41 +48,26 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
             routetekst   = ""
 
         if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            opmerkingen = (str(rit['Opmerkingen']['Opmerking']) + '.')
+            opmerkingen = ', ' + (str(rit['Opmerkingen']['Opmerking']))
         else:
             opmerkingen  = ""
 
         if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            VertekVertragingTekst = (str(rit['VertrekVertragingTekst']) + '.')
+            VertekVertragingTekst = (str(rit['VertrekVertragingTekst']))
         else:
             VertekVertragingTekst = ""
 
-        Label(root, text=str(rit['TreinSoort']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index,column=0)
-        Label(root, text=str(rit['VertrekTijd'][11:16]), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index,column=1)
-        Label(root, text=str(rit['EindBestemming']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index,column=2)
-        Label(root, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index,column=3)
-        Label(root, text=str(opmerkingen), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index,column=4)
+        Label(root, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=0, sticky=NW)
+        Label(root, text=str(rit['EindBestemming']),  fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
+        Label(root, text=str(rit['VertrekSpoor']['#text']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=2, sticky=NW)
+        Label(root, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=3, sticky=NW)
+        Label(root, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=4, sticky=NW)
 
-        result = result + 'De ' + str(rit['TreinSoort'])
-        result = result + ' van ' + str(rit['VertrekTijd'][11:16])
-        result = result + ' richting ' + str(rit['EindBestemming'])
-        result = result + ' vertrekt vanaf spoor ' + str(rit['VertrekSpoor']['#text']) + '.'
-        if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            print('Deze trein reist via ' + str(rit['RouteTekst']) + '.')
-        if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            print(str(rit['Opmerkingen']['Opmerking']) + '.')
-        if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            print('De vertraging bedraagt ' + str(rit['VertrekVertragingTekst']) + '.')
-        print('\n')
         index += 1
 
     return result
 
 actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
-
-
-
-
 
 window = Tk()
 
