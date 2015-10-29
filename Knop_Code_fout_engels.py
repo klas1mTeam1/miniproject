@@ -6,6 +6,7 @@ import requests
 import codecs
 import Startscherm_engels
 import Knop_Code_fout2_engels
+import Utrecht_centraal_in_tkinter_interface_engels
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
@@ -64,6 +65,7 @@ def terug_hoofdmenu_engels():
 # Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
     window.destroy()
+    Utrecht_centraal_in_tkinter_interface_engels.utrecht_scherm()
 
 def scherm():
     global window
