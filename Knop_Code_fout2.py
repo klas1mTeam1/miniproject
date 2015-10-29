@@ -15,6 +15,7 @@ def tekstvak():
     tekstvakje.focus_set()
     # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        global content
         content = tekstvakje.get()
         auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
@@ -43,12 +44,9 @@ def tekstvak():
                 window.destroy()
                 Knop_Code_fout.scherm()
             else:
-                print('Goed')
+                window.destroy()
             bestand.close()
-
         check_station()
-        window.destroy()
-        print(content)
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 
@@ -93,6 +91,8 @@ def scherm():
     titel.pack()
     subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18))
     subtitel.pack()
+    error_tekst = Label(window, text = 'Het ingevoerde station bestaat niet.\n', fg='red', font = ('Ariel', 14, 'bold'))
+    error_tekst.pack()
 
 
     # Voegt een knop aan het venster om te kiezen voor het huidige station.

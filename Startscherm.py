@@ -33,6 +33,7 @@ def create_window():
 # Zet het venster op de goede plek met de goede grootte.
     root.geometry('%dx%d+%d+%d' % (w, h, x, y))
     root.deiconify()
+    root.resizable(0, 0)
 
 # onderstaande code maakt de topframe en wordt ingepakt in de root window.
     global topframe

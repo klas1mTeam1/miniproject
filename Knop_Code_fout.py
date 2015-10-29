@@ -5,7 +5,7 @@ import tkinter as tk
 import requests
 import codecs
 import Startscherm
-import Knop_Code_fout
+import Knop_Code_fout2
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
@@ -15,6 +15,7 @@ def tekstvak():
     tekstvakje.focus_set()
     # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        global content
         content = tekstvakje.get()
         auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
@@ -41,7 +42,7 @@ def tekstvak():
             data = bestand.read()
             if error in data:
                 window.destroy()
-                Knop_Code_fout.scherm()
+                Knop_Code_fout2.scherm()
             else:
                 print('Goed')
             bestand.close()
@@ -93,6 +94,8 @@ def scherm():
     titel.pack()
     subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18))
     subtitel.pack()
+    error_tekst = Label(window, text = 'Het ingevoerde station bestaat niet.\n', fg='red', font = ('Ariel', 14, 'bold'))
+    error_tekst.pack()
 
 
     # Voegt een knop aan het venster om te kiezen voor het huidige station.
