@@ -43,14 +43,27 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
 def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
     index = 0
 
-    Label(topframe, text='Tijd', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=0, sticky=NW)
-    Label(topframe, text='Naar', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=1, sticky=NW)
-    Label(topframe, text='Spoor', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=2, sticky=NW)
-    Label(topframe, text='Via', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=3, sticky=NW)
-    Label(topframe, text='Reisdetails', fg='#003399', font = ('Ariel',9, 'bold')).grid(row=0,column=4, sticky=NW)
+
+    Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=0, sticky=NSEW)
+    Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=1, sticky=NSEW)
+    Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=2, sticky=NSEW)
+    Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=3, sticky=NSEW)
+    Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=4, sticky=NSEW)
+
+
+    Label(topframe, text='Tijd', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=0, sticky=NSEW,)
+    Label(topframe, text='Naar', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=1, sticky=NSEW)
+    Label(topframe, text='Spoor', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=2, sticky=NSEW)
+    Label(topframe, text='Via', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=3, sticky=NSEW)
+    Label(topframe, text='Reisdetails', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=4, sticky=NSEW)
 
     result = ""
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+        if index % 2 == 0:
+            kleur = '#FFF5D6'
+        else:
+            kleur = 'white'
+
         if index==18:
             break
 
@@ -70,11 +83,11 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
         else:
             VertekVertragingTekst = ""
 
-        Label(topframe, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=0, sticky=NW)
-        Label(topframe, text=str(rit['EindBestemming']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=1, sticky=NW)
-        Label(topframe, text=str(rit['VertrekSpoor']['#text']), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=2, sticky=NW)
-        Label(topframe, text=str(routetekst), fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=3, sticky=NW)
-        Label(topframe, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+1,column=4, sticky=NW)
+        Label(topframe, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), background = kleur, anchor = NW, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+2,column=0, sticky = NSEW)
+        Label(topframe, text=str(rit['EindBestemming']), bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=1, sticky = NSEW)
+        Label(topframe, text=str(rit['VertrekSpoor']['#text']), bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=2, sticky=NSEW)
+        Label(topframe, text=str(routetekst), background = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=3, sticky=NSEW)
+        Label(topframe, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=4, sticky=NSEW)
 
         index += 1
 
@@ -119,7 +132,7 @@ def utrecht_scherm():
     plaats_actueel_utrecht_op_grid(window, actueel_utrecht_dict)
 
     # Standaard venster met keuze.
-    window.title("Actuele vertrektijden")
+    window.title("Actuele vertrektijden van Station Utrecht Centraal")
 
     knop_terug_hoofdmenu = Button(bottomframe, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
     knop_terug_hoofdmenu.pack()
