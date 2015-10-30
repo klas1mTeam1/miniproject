@@ -7,16 +7,17 @@ import codecs
 import Startscherm_engels
 import Knop_Code_fout2_engels
 import Utrecht_centraal_in_tkinter_interface_engels
-import geen_verbinding_api
+import ander_station_in_tkinter_interface_engels
+import geen_verbinding_api_engels
 
-# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
+    """Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt."""
     knop_ander_station.configure(state = DISABLED)
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
     tekstvakje.focus_set()
-    # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        """Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster."""
         global content
         content = tekstvakje.get()
 
@@ -29,9 +30,10 @@ def tekstvak():
             actueel_as = requests.get(new_url, auth=auth_details) #actuele vertrekinformatie van de gewenste station
         except:
             window.destroy()
-            geen_verbinding_api.scherm_geen()
+            geen_verbinding_api_engels.scherm_geen()
 
-        def schrijf_actueel_as_xml(): #schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station
+        def schrijf_actueel_as_xml():
+            """Schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station"""
             bestand = open('actueel_as.xml', 'w')
             bestand = codecs.open('actueel_as.xml', "w", "utf-8")
             bestand.write(str(actueel_as.text))
@@ -39,36 +41,44 @@ def tekstvak():
 
         schrijf_actueel_as_xml()
 
+        def check_station_bestand():
+            """Schrijft de ingevoerde tekst naar een bestand zodat het later gecontroleerd kan worden."""
+            bestand = open('check_station.txt', 'w')
+            bestand.write(content)
+            bestand.close()
+
+        check_station_bestand()
+
         def check_station():
-            error = "No station found for input"
-            error2 = "station parameter should be provided"
+            """Controle voor het ingevulde station. Als er een error voor komt wordt er een error tekst weergeven."""
+            error = "error"
             bestand = open('actueel_as.xml', 'r')
             data = bestand.read()
             if error in data:
                 window.destroy()
                 Knop_Code_fout2_engels.scherm()
-            elif error2 in data:
-                window.destroy()
-                Knop_Code_fout2_engels.scherm()
             else:
-                print('Goed')
                 window.destroy()
+                ander_station_in_tkinter_interface_engels.as_scherm()
             bestand.close()
         check_station()
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 
-# Geeft functionaliteit aan de "Terug naar het hoofdmenu" knop.
-def terug_hoofdmenu_engels():
+def terug_hoofdmenu():
+    """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    create_window() van het bestand Startscherm.py"""
     window.destroy()
     Startscherm_engels.create_window()
 
-# Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
+    """Deze functie is gekoppeld aan de knop Utrecht Centraal, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    utrecht_scherm() van het bestand Utrecht_centraal_in_tkinter.py"""
     window.destroy()
     Utrecht_centraal_in_tkinter_interface_engels.utrecht_scherm()
 
 def scherm():
+    """Deze functie maakt het venster en verzorgt de opmaak van het scherm."""
     global window
     global knop_ander_station
 
@@ -99,9 +109,9 @@ def scherm():
     window.title("Current departures")
     titel = Label(window, text='\nCurrent departures.\n', fg='#003399', font = ('Ariel',24, 'bold'))
     titel.pack()
-    subtitel = Label(window, text='What station would you like to see current departures of?\n', fg='#003399', font = ('Ariel',18))
+    subtitel = Label(window, text='What station would you like to request current departures of?\n', fg='#003399', font = ('Ariel',18))
     subtitel.pack()
-    error_tekst = Label(window, text = 'The entered station could not be found.\n', fg='red', font = ('Ariel', 14, 'bold'))
+    error_tekst = Label(window, text = 'The requested station was not found.\nPlease check your input and try again.', fg='red', font = ('Ariel', 14, 'bold'))
     error_tekst.pack()
 
 
@@ -114,7 +124,7 @@ def scherm():
     knop_ander_station.pack(pady=5)
 
     # Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu.
-    knop_terug = Button(window, text="Back to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu_engels)
+    knop_terug = Button(window, text="Back to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
     knop_terug.pack()
     knop_terug.place(relx=0.01, rely=0.9)
 
