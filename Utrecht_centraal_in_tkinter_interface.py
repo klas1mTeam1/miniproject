@@ -9,6 +9,7 @@ import Knop_Code
 import geen_verbinding_api
 
 def utrecht_scherm():
+    """Deze functie bevat de hele code voor het weergeven van de vertrektijden van Utrecht Centraal."""
     def terug_hoofdmenu():
         window.destroy()
         Startscherm.create_window()
