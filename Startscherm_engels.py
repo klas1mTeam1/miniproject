@@ -5,17 +5,20 @@ import tkinter as tk
 import Knop_Code_engels
 import Startscherm
 
-# Hieronder een functie om knop 5 een opdracht te kunnen geven
-def naar_knop_code_engels():
+
+def naar_knop_code():
+    """Deze functie sluit het huidige scherm en opent de functie scherm() vanuit bestand Knop_code.py"""
     root.destroy()
     Knop_Code_engels.scherm()
 
 def taal_nederlands():
+    """Deze functie sluit het huidige scherm en opent de functie create_window() vanuit bestand Startscherm_engels.py"""
     root.destroy()
     Startscherm.create_window()
 
-# Functie aangemaakt om de startscherm weer te geven.
+
 def create_window():
+    """ Functie aangemaakt om de opmaak en volledige functionaliteit van het hoofdscherm weer te geven."""
     global root
     root = Tk()                 # Dit is het basis window.
     root.title("NS Machine")              # titel van de window.
@@ -122,7 +125,8 @@ def create_window():
     knop2 = Button(text='Buy\nsingle ticket', bg='#003399', fg='white')
     knop3 = Button(text='Buy\nOV-chipcard', bg='#003399', fg='white')
     knop4 = Button(text='I want to go\nabroad', bg='#003399', fg='white')
-    knop5 = Button(text='Current\ndepartures', bg='#003399', fg='white', command=naar_knop_code_engels)
+    knop5 = Button(text='Current\ndepartures', bg='#003399', fg='white', command=naar_knop_code)
+
 
 
     knop1.pack()

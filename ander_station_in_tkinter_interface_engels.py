@@ -8,8 +8,8 @@ import Startscherm_engels
 import Knop_Code_engels
 import geen_verbinding_api_engels
 
-def utrecht_scherm():
-    """Deze functie bevat de hele code voor het weergeven van de vertrektijden van Utrecht Centraal."""
+def as_scherm():
+    """Deze functie bevat de hele code voor het weergeven van de vertrektijden van de ingevoerde station."""
     def terug_hoofdmenu():
         """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
             create_window() van het bestand Startscherm.py"""
@@ -21,31 +21,43 @@ def utrecht_scherm():
         window.destroy()
         Knop_Code_engels.scherm()
 
+    def get_input():
+        """Hier wordt het bestand check_station.txt geopend en gelezen en uiteindelijk afgesloten"""
+        global content
+        bestand = open('check_station.txt', 'r')
+        content = bestand.read()
+        bestand.close()
+
+    get_input()
+
     auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0pDQxbTN2-R5ZWQQXrvRwA') #inlogcodes NS-API
 
     try:
-        actueel_utrecht = requests.get('http://webservices.ns.nl/ns-api-avt?station=ut', auth=auth_details) #actuele vertrekinformatie Utrecht Centraal
+        url = 'http://webservices.ns.nl/ns-api-avt?station='
+        as_id = content
+        new_url = "{}{}".format(url,as_id)
+        actueel_as = requests.get(new_url, auth=auth_details) #actuele vertrekinformatie van de gewenste station
     except:
+        window.destroy()
         geen_verbinding_api_engels.scherm_geen()
 
-
-    def schrijf_actueel_utrecht_xml(actueel_utrecht):
-        """schrijft een xml bestand van de actuele vertrekinformatie Station Utrecht Centraal"""
-        bestand = open('actueel_utrecht.xml', 'w')
-        bestand = codecs.open('actueel_utrecht.xml', "w", "utf-8")
-        bestand.write(str(actueel_utrecht.text))
+    def schrijf_actueel_as_xml(actueel_as):
+        """schrijft een xml bestand van de actuele vertrekinformatie station"""
+        bestand = open('actueel_as.xml', 'w')
+        bestand = codecs.open('actueel_as.xml', "w", "utf-8")
+        bestand.write(str(actueel_as.text))
         bestand.close()
 
-    schrijf_actueel_utrecht_xml(actueel_utrecht)
+    schrijf_actueel_as_xml(actueel_as)
 
-    def verwerk_actueel_utrecht_xml():
-        """verwerkt actuele vertrekinformatie Utrecht Centraal xml naar dictionary"""
-        bestand = open('actueel_utrecht.xml', 'r')
+    def verwerk_actueel_as_xml():
+        """verwerkt actuele vertrekinformatie station xml naar dictionary"""
+        bestand = open('actueel_as.xml', 'r')
         xml_string = bestand.read()
         bestand.close()
         return xmltodict.parse(xml_string)
 
-    def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict):
+    def plaats_actueel_as_op_grid(root, actueel_as_dict):
         """print de actuele vertrekinformatie van station"""
         index = 0
 
@@ -62,7 +74,7 @@ def utrecht_scherm():
         Label(topframe, text='Journey Details', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=4, sticky=NSEW)
 
         result = ""
-        for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+        for rit in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
 
             if index % 2 == 0:
                 kleur = '#FFF5D6'
@@ -72,37 +84,37 @@ def utrecht_scherm():
             if index > 16:
                 break
 
-            if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'RouteTekst' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 routetekst  =  str(rit['RouteTekst'])
             else:
                 routetekst   = ""
 
-            if '#text' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]['VertrekSpoor']:
+            if '#text' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]['VertrekSpoor']:
                 VertrekSpoor = (str(rit['VertrekSpoor']['#text']))
             else:
                 VertrekSpoor = ""
 
-            if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'Opmerkingen' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 Opmerkingen = ', ' + (str(rit['Opmerkingen']['Opmerking']))
             else:
                 Opmerkingen  = ""
 
-            if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'VertrekVertragingTekst' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 VertrekVertragingTekst = (str(rit['VertrekVertragingTekst']))
             else:
                 VertrekVertragingTekst = ""
 
-            if 'VertrekTijd' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'VertrekTijd' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 VertrekTijd = (str(rit['VertrekTijd'][11:16]))
             else:
                 VertrekTijd = ""
 
-            if 'EindBestemming' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'EindBestemming' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 EindBestemming = (str(rit['EindBestemming']))
             else:
                 EindBestemming = ""
 
-            if 'TreinSoort' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            if 'TreinSoort' in actueel_as_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
                 TreinSoort = (str(rit['TreinSoort']))
             else:
                 TreinSoort = ""
@@ -117,7 +129,9 @@ def utrecht_scherm():
 
         return result
 
-    actueel_utrecht_dict = verwerk_actueel_utrecht_xml()
+    actueel_as_dict = verwerk_actueel_as_xml()
+
+
 
     global window
     window = Tk()
@@ -153,18 +167,17 @@ def utrecht_scherm():
     bottomframe.pack_propagate(0)
     bottomframe.place(relx=0, rely=0.88)
 
-    plaats_actueel_utrecht_op_grid(window, actueel_utrecht_dict)
+    plaats_actueel_as_op_grid(window, actueel_as_dict)
 
     # Standaard venster met keuze.
-    window.title("Current departures from Station Utrecht Centraal")
-
-    knop_terug_hoofdmenu = Button(bottomframe, text="Return to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
-    knop_terug_hoofdmenu.pack()
-    knop_terug_hoofdmenu.place(relx=0.165, rely=0.2)
+    window.title("Current departures of Station " + str(content))
 
     knop_terug = Button(bottomframe, text="Return", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug)
     knop_terug.pack()
     knop_terug.place(relx=0.01, rely=0.2)
 
-    window.mainloop()
+    knop_terug_hoofdmenu = Button(bottomframe, text="Return to\nmain menu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
+    knop_terug_hoofdmenu.pack()
+    knop_terug_hoofdmenu.place(relx=0.165, rely=0.2)
 
+    window.mainloop()
