@@ -5,17 +5,20 @@ import tkinter as tk
 import Knop_Code
 import Startscherm_engels
 
-# Hieronder een functie om knop 5 een opdracht te kunnen geven
+
 def naar_knop_code():
+    """Deze functie sluit het huidige scherm en opent de functie scherm() vanuit bestand Knop_code.py"""
     root.destroy()
     Knop_Code.scherm()
 
 def taal_engels():
+    """Deze functie sluit het huidige scherm en opent de functie create_window() vanuit bestand Startscherm_engels.py"""
     root.destroy()
     Startscherm_engels.create_window()
 
-# Functie aangemaakt om de startscherm weer te geven.
+
 def create_window():
+    """ Functie aangemaakt om de opmaak en volledige functionaliteit van het hoofdscherm weer te geven."""
     global root
     root = Tk()                 # Dit is het basis window.
     root.title("NS Automaat")              # titel van de window.

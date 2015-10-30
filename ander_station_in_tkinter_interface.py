@@ -9,15 +9,20 @@ import Knop_Code
 import geen_verbinding_api
 
 def as_scherm():
+    """Deze functie bevat de hele code voor het weergeven van de vertrektijden van de ingevoerde station."""
     def terug_hoofdmenu():
+        """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+            create_window() van het bestand Startscherm.py"""
         window.destroy()
         Startscherm.create_window()
 
     def terug():
+        """Deze functie is gekoppeld aan de knop_terug, en sluit het huidige scherm en start de functie scherm() uit bestand Knop_Code.py"""
         window.destroy()
         Knop_Code.scherm()
 
     def get_input():
+        """Hier wordt het bestand check_station.txt geopend en gelezen en uiteindelijk afgesloten"""
         global content
         bestand = open('check_station.txt', 'r')
         content = bestand.read()
@@ -36,7 +41,8 @@ def as_scherm():
         window.destroy()
         geen_verbinding_api.scherm_geen()
 
-    def schrijf_actueel_as_xml(actueel_as): #schrijft een xml bestand van de actuele vertrekinformatie station
+    def schrijf_actueel_as_xml(actueel_as):
+        """schrijft een xml bestand van de actuele vertrekinformatie station"""
         bestand = open('actueel_as.xml', 'w')
         bestand = codecs.open('actueel_as.xml', "w", "utf-8")
         bestand.write(str(actueel_as.text))
@@ -44,13 +50,15 @@ def as_scherm():
 
     schrijf_actueel_as_xml(actueel_as)
 
-    def verwerk_actueel_as_xml(): #verwerkt actuele vertrekinformatie station xml naar dictionary
+    def verwerk_actueel_as_xml():
+        """verwerkt actuele vertrekinformatie station xml naar dictionary"""
         bestand = open('actueel_as.xml', 'r')
         xml_string = bestand.read()
         bestand.close()
         return xmltodict.parse(xml_string)
 
-    def plaats_actueel_as_op_grid(root, actueel_as_dict): #print de actuele vertrekinformatie van station
+    def plaats_actueel_as_op_grid(root, actueel_as_dict):
+        """print de actuele vertrekinformatie van station"""
         index = 0
 
         Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=0, sticky=NSEW)
