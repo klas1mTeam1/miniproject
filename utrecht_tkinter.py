@@ -1,8 +1,6 @@
 __author__ = 'Team1'
 
 from tkinter import *
-import tkinter as tk
-import os
 
 #Deze code haalt data uit de NS-API en verwerkt de benodigde data met betrekking tot actuele vertrekinformatie.
 
