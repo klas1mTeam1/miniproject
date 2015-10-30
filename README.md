@@ -22,10 +22,10 @@ Voor meer informatie over het gebruiken van het programma kan je de screencast b
 
 De bestanden van het programma zijn terug te vinden op https://github.com/klas1mTeam1/miniproject
 
-###Credits
+####Credits
 Dit programma is gemaakt door:
-Trever
-Marcelo
-Akshay
-Youri
-Martijn
+Trever, 
+Marcelo, 
+Akshay, 
+Youri, 
+Martijn.
