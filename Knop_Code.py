@@ -10,14 +10,15 @@ import Utrecht_centraal_in_tkinter_interface
 import ander_station_in_tkinter_interface
 import geen_verbinding_api
 
-# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
+    """Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt."""
     knop_ander_station.configure(state = DISABLED)
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
     tekstvakje.focus_set()
-    # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        """Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
+        Er wordt ook gecontroleerd of het station wat ingevoerd is wel bestaat."""
         global content
         content = tekstvakje.get()
 
@@ -32,7 +33,8 @@ def tekstvak():
             window.destroy()
             geen_verbinding_api.scherm_geen()
 
-        def schrijf_actueel_as_xml(): #schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station
+        def schrijf_actueel_as_xml():
+            """Schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station"""
             bestand = open('actueel_as.xml', 'w')
             bestand = codecs.open('actueel_as.xml', "w", "utf-8")
             bestand.write(str(actueel_as.text))
@@ -41,6 +43,7 @@ def tekstvak():
         schrijf_actueel_as_xml()
 
         def check_station_bestand():
+            """Schrijft de ingevoerde tekst naar een bestand zodat het later gecontroleerd kan worden."""
             bestand = open('check_station.txt', 'w')
             bestand.write(content)
             bestand.close()
@@ -48,6 +51,7 @@ def tekstvak():
         check_station_bestand()
 
         def check_station():
+            """Controle voor het ingevulde station. Als """
             error = "error"
             bestand = open('actueel_as.xml', 'r')
             data = bestand.read()
