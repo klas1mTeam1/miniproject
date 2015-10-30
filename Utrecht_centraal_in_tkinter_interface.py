@@ -146,6 +146,7 @@ def utrecht_scherm():
     bottomframe = Frame(window, width=800, height=60)
     bottomframe.pack(side=BOTTOM)
     bottomframe.pack_propagate(0)
+    bottomframe.place(relx=0, rely=0.88)
 
     plaats_actueel_utrecht_op_grid(window, actueel_utrecht_dict)
 
@@ -154,7 +155,7 @@ def utrecht_scherm():
 
     knop_terug_hoofdmenu = Button(bottomframe, text="Terug naar\nhet hoofdmenu", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug_hoofdmenu)
     knop_terug_hoofdmenu.pack()
-    knop_terug_hoofdmenu.place(relx=0.19, rely=0.2)
+    knop_terug_hoofdmenu.place(relx=0.165, rely=0.2)
 
     knop_terug = Button(bottomframe, text="Terug", fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", height = 2, width = 15, command = terug)
     knop_terug.pack()
