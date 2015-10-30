@@ -1,4 +1,4 @@
-__author__ = 'marce'
+__author__ = 'Team1'
 
 from tkinter import *
 import Startscherm

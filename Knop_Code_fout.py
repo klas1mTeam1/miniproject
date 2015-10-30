@@ -1,4 +1,4 @@
-__author__ = 'Youri'
+__author__ = 'Team1'
 
 from tkinter import *
 import tkinter as tk
