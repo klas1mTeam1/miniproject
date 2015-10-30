@@ -37,7 +37,6 @@ def scherm_geen():
     # Standaard venster met keuze.
     window.title("Kan geen verbinding worden gemaakt met de NS servers")
     error_tekst = Label(window, text = 'Er kan geen verbinding worden gemaakt\nProbeer het opnieuw\nof vraag het aan de service balie ', fg='red', font = ('Ariel', 14, 'bold'))
-    error_tekst.pack()
     error_tekst.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     # Voegt een aan het venster om te kiezen om terug te gaan naar het hoofdmenu.

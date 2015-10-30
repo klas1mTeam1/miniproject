@@ -10,14 +10,14 @@ import Utrecht_centraal_in_tkinter_interface
 import ander_station_in_tkinter_interface
 import geen_verbinding_api
 
-# Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
+    """Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt."""
     knop_ander_station.configure(state = DISABLED)
     tekstvakje = tk.Entry(window, bg='white')
     tekstvakje.pack(pady=5)
     tekstvakje.focus_set()
-    # Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster.
     def callback():
+        """Zorgt voor het returnen van de ingevulde tekst en gaat naar het volgende venster."""
         global content
         content = tekstvakje.get()
 
@@ -32,7 +32,8 @@ def tekstvak():
             window.destroy()
             geen_verbinding_api.scherm_geen()
 
-        def schrijf_actueel_as_xml(): #schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station
+        def schrijf_actueel_as_xml():
+            """Schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station"""
             bestand = open('actueel_as.xml', 'w')
             bestand = codecs.open('actueel_as.xml', "w", "utf-8")
             bestand.write(str(actueel_as.text))
@@ -41,6 +42,7 @@ def tekstvak():
         schrijf_actueel_as_xml()
 
         def check_station_bestand():
+            """Schrijft de ingevoerde tekst naar een bestand zodat het later gecontroleerd kan worden."""
             bestand = open('check_station.txt', 'w')
             bestand.write(content)
             bestand.close()
@@ -48,6 +50,7 @@ def tekstvak():
         check_station_bestand()
 
         def check_station():
+            """Controle voor het ingevulde station. Als er een error voor komt wordt er een error tekst weergeven."""
             error = "error"
             bestand = open('actueel_as.xml', 'r')
             data = bestand.read()
@@ -62,17 +65,20 @@ def tekstvak():
     ok_knop = Button(window, text='OK', fg="white", bg="#003399", activebackground = "white", activeforeground = "#003399", command = callback)
     ok_knop.pack(pady=5)
 
-# Geeft functionaliteit aan de "Terug naar het hoofdmenu" knop.
 def terug_hoofdmenu():
+    """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    create_window() van het bestand Startscherm.py"""
     window.destroy()
     Startscherm.create_window()
 
-# Geeft functionaliteit aan de "Utrecht Centraal" knop.
 def knop_utrecht():
+    """Deze functie is gekoppeld aan de knop Utrecht Centraal, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    utrecht_scherm() van het bestand Utrecht_centraal_in_tkinter.py"""
     window.destroy()
     Utrecht_centraal_in_tkinter_interface.utrecht_scherm()
 
 def scherm():
+    """Deze functie maakt het venster en verzorgt de opmaak van het scherm."""
     global window
     global knop_ander_station
 
