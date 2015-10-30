@@ -1,12 +1,10 @@
 from tkinter import *
-import tkinter as tk
-import os
 import requests
 import codecs
 import xmltodict
-import sys
 import Startscherm
 import Knop_Code
+import geen_verbinding_api
 
 def as_scherm():
     def terug_hoofdmenu():
@@ -33,8 +31,8 @@ def as_scherm():
         new_url = "{}{}".format(url,as_id)
         actueel_as = requests.get(new_url, auth=auth_details) #actuele vertrekinformatie van de gewenste station
     except:
-        print("Kan geen verbinding maken met de NS API.")
-        sys.exit()
+        window.destroy()
+        geen_verbinding_api.scherm_geen()
 
     def schrijf_actueel_as_xml(actueel_as): #schrijft een xml bestand van de actuele vertrekinformatie station
         bestand = open('actueel_as.xml', 'w')

@@ -1,13 +1,11 @@
 __author__ = 'Akshay, Martijn'
 from tkinter import *
-import tkinter as tk
-import os
 import requests
 import codecs
 import xmltodict
-import sys
 import Startscherm_engels
 import Knop_Code_engels
+import geen_verbinding_api
 
 def terug_hoofdmenu():
     window.destroy()
@@ -22,8 +20,8 @@ auth_details = ('martijn.dull@student.hu.nl', '0yZyZgme8551xHmiqvTNBxl-iMl0xOPZ0
 try:
     actueel_utrecht = requests.get('http://webservices.ns.nl/ns-api-avt?station=ut', auth=auth_details) #actuele vertrekinformatie Utrecht Centraal
 except:
-    print("Can't connect to the NS API.")
-    sys.exit()
+    window.destroy()
+    geen_verbinding_api.scherm_geen()
 
 
 def schrijf_actueel_utrecht_xml(actueel_utrecht): #schrijft een xml bestand van de actuele vertrekinformatie Station Utrecht Centraal

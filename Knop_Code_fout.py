@@ -8,6 +8,7 @@ import Startscherm
 import Knop_Code_fout2
 import Utrecht_centraal_in_tkinter_interface
 import ander_station_in_tkinter_interface
+import geen_verbinding_api
 
 # Geeft een tekstvakje en "OK" knop onder de knop "Ander station" als je er op klikt.
 def tekstvak():
@@ -28,8 +29,8 @@ def tekstvak():
             new_url = "{}{}".format(url,as_id)
             actueel_as = requests.get(new_url, auth=auth_details) #actuele vertrekinformatie van de gewenste station
         except:
-            print("Kan geen verbinding maken met de NS API.")
-            sys.exit()
+            window.destroy()
+            geen_verbinding_api.scherm_geen()
 
         def schrijf_actueel_as_xml(): #schrijft een xml bestand van de actuele vertrekinformatie van de gewenste station
             bestand = open('actueel_as.xml', 'w')
