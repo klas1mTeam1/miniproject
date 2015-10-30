@@ -6,10 +6,14 @@ import Startscherm
 
 # Geeft functionaliteit aan de "Terug naar het hoofdmenu" knop.
 def terug_hoofdmenu():
+    """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    create_window() van het bestand Startscherm.py"""
     window.destroy()
     Startscherm.create_window()
 
 def scherm_geen():
+    """Hier wordt een scherm geprogrameerd die aangeeft dat er geen verbinding mogelijk is, tevens wordt er een knop aangemaakt die je de optie
+    geeft om terug te gaan naar de hoofdscherm"""
     global window
     window = Tk()
 
