@@ -18,7 +18,7 @@ Om het programma te starten open je start.py met Pycharm en druk je op afspelen.
 Als het programma gestart is kan het bediend worden door op de knoppen te drukken.
 (Alleen de taal knoppen en de 'Actuele vertrektijden' knop werken op het startscherm. De knoppen op de andere schermen werken allemaal.)
 
-Voor meer informatie over het gebruiken van het programma kan je de screencast bekijken.
+Voor meer informatie over het gebruiken van het programma kan je de screencast video of de powerpoint bekijken.
 
 De bestanden van het programma zijn terug te vinden op https://github.com/klas1mTeam1/miniproject
 
