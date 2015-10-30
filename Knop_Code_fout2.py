@@ -105,7 +105,7 @@ def scherm():
     titel.pack()
     subtitel = Label(window, text='Van welk station wilt u de actuele vertrektijden opvragen?\n', fg='#003399', font = ('Ariel',18))
     subtitel.pack()
-    error_tekst = Label(window, text = 'Het opgegeven station is niet gevonden.\nControleer de invoer en probeer opnieuw.', fg='red', font = ('Ariel', 14, 'bold'))
+    error_tekst = Label(window, text = 'Het opgegeven station is niet gevonden.\nControleer de invoer en probeer het opnieuw.', fg='red', font = ('Ariel', 14, 'bold'))
     error_tekst.pack()
 
 
