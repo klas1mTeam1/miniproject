@@ -1,4 +1,4 @@
-__author__ = 'marce'
+__author__ = 'Team1'
 
 import requests
 import codecs

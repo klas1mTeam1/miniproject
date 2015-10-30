@@ -1,4 +1,5 @@
-__author__ = 'Akshay, Martijn'
+__author__ = 'Team1'
+
 from tkinter import *
 import requests
 import codecs

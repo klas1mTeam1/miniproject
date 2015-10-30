@@ -1,3 +1,5 @@
+__author__ = 'Team1'
+
 from tkinter import *
 import requests
 import codecs
