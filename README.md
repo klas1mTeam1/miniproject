@@ -1,13 +1,13 @@
 # Miniproject
 Miniproject Actuele vertrektijden op de NS kaartverkoopautomaat
 
-###Requirements
+####Requirements
 1. Internet
 2. request module
 3. codecs module
 4. xmltodict module
 
-###Usage
+####Usage
 Het programma moet gestart worden met start.py
 
 Als het programma gestart is kan het bedient worden door op de knoppen te drukken.
