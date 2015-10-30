@@ -1,4 +1,4 @@
-__author__ = 'Team1'
+__author__ = 'Akshay, Martijn'
 
 from tkinter import *
 import requests
@@ -9,10 +9,14 @@ import Knop_Code
 import geen_verbinding_api
 
 def terug_hoofdmenu():
+    """Deze functie is gekoppeld aan de knop terug hoofdmenu, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functi
+    create_window() van het bestand Startscherm.py"""
     window.destroy()
     Startscherm.create_window()
 
 def terug():
+    """Deze functie is gekoppeld aan de knop terug, deze code zorgt ervoor dat het huidige scherm wordt gesloten en opent de functie
+    scherm() van het bestand Knop_Code.py"""
     window.destroy()
     Knop_Code.scherm()
 
