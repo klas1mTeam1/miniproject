@@ -40,16 +40,14 @@ def verwerk_actueel_utrecht_xml(): #verwerkt actuele vertrekinformatie Utrecht C
     bestand.close()
     return xmltodict.parse(xml_string)
 
-def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van Station Utrecht Centraal
+def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuele vertrekinformatie van station
     index = 0
-
 
     Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=0, sticky=NSEW)
     Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=1, sticky=NSEW)
     Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=2, sticky=NSEW)
     Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=3, sticky=NSEW)
     Label(topframe, anchor = NW, bg = '#FECE22').grid(row =0, column=4, sticky=NSEW)
-
 
     Label(topframe, text='Tijd', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=0, sticky=NSEW,)
     Label(topframe, text='Naar', anchor = NW, bg = 'white', fg='#003399', font = ('Ariel',10, 'bold')).grid(row=1,column=1, sticky=NSEW)
@@ -59,35 +57,55 @@ def plaats_actueel_utrecht_op_grid(root, actueel_utrecht_dict): #print de actuel
 
     result = ""
     for rit in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein']:
+
         if index % 2 == 0:
             kleur = '#FFF5D6'
         else:
             kleur = 'white'
 
-        if index==18:
+        if index > 16:
             break
-
 
         if 'RouteTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
             routetekst  =  str(rit['RouteTekst'])
         else:
             routetekst   = ""
 
-        if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            opmerkingen = ', ' + (str(rit['Opmerkingen']['Opmerking']))
+        if '#text' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]['VertrekSpoor']:
+            VertrekSpoor = (str(rit['VertrekSpoor']['#text']))
         else:
-            opmerkingen  = ""
+            VertrekSpoor = ""
+
+        if 'Opmerkingen' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            Opmerkingen = ', ' + (str(rit['Opmerkingen']['Opmerking']))
+        else:
+            Opmerkingen  = ""
 
         if 'VertrekVertragingTekst' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
-            VertekVertragingTekst = (str(rit['VertrekVertragingTekst']))
+            VertrekVertragingTekst = (str(rit['VertrekVertragingTekst']))
         else:
-            VertekVertragingTekst = ""
+            VertrekVertragingTekst = ""
 
-        Label(topframe, text=str(rit['VertrekTijd'][11:16]) + ' ' + str(VertekVertragingTekst), background = kleur, anchor = NW, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+2,column=0, sticky = NSEW)
-        Label(topframe, text=str(rit['EindBestemming']), bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=1, sticky = NSEW)
-        Label(topframe, text=str(rit['VertrekSpoor']['#text']), bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=2, sticky=NSEW)
+        if 'VertrekTijd' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            VertrekTijd = (str(rit['VertrekTijd'][11:16]))
+        else:
+            VertrekTijd = ""
+
+        if 'EindBestemming' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            EindBestemming = (str(rit['EindBestemming']))
+        else:
+            EindBestemming = ""
+
+        if 'TreinSoort' in actueel_utrecht_dict['ActueleVertrekTijden']['VertrekkendeTrein'][index]:
+            TreinSoort = (str(rit['TreinSoort']))
+        else:
+            TreinSoort = ""
+
+        Label(topframe, text=str(VertrekTijd) + ' ' + str(VertrekVertragingTekst), background = kleur, anchor = NW, fg='#003399', font = ('Ariel',9, 'bold')).grid(row=index+2,column=0, sticky = NSEW)
+        Label(topframe, text=EindBestemming, bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=1, sticky = NSEW)
+        Label(topframe, text=VertrekSpoor, bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=2, sticky=NSEW)
         Label(topframe, text=str(routetekst), background = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=3, sticky=NSEW)
-        Label(topframe, text=str(rit['TreinSoort']) + (opmerkingen), wraplength = 100, justify = LEFT, bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=4, sticky=NSEW)
+        Label(topframe, text=TreinSoort + Opmerkingen, wraplength = 100, justify = LEFT, bg = kleur, fg='#003399', anchor = NW, font = ('Ariel',9, 'bold')).grid(row=index+2,column=4, sticky=NSEW)
 
         index += 1
 
